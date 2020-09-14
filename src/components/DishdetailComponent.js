@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';  //CardImgOverlay, 
-
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';  //CardImgOverlay, 
+import { Link } from 'react-router-dom';
 
 class DishDetail extends Component {
 
@@ -8,7 +8,8 @@ class DishDetail extends Component {
         super(props);
 
         this.state = {
-            selectedDish: null
+            selectedDish: null,
+            comments: null
         }
     }
 
@@ -61,8 +62,24 @@ class DishDetail extends Component {
             return (
                 <div className="container">
                     <div className="row">
-                        {this.renderDishDetail(this.props.selectedDish)}
-                        {this.renderComments(this.props.selectedDish.comments)}
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{this.props.selectedDish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>{this.props.selectedDish.name}</h3>
+                            <hr />
+                        </div>                
+                    </div>
+                    <div className="row">
+                        {/* <div className="col-12 col-md-5 m-1"> */}
+                            {/* <RenderDish dish={props.dish} /> */}
+                            {this.renderDishDetail(this.props.selectedDish)}
+                        {/* </div> */}
+                        {/* <div className="col-12 col-md-5 m-1"> */}
+                            {/* <RenderComments comments={props.comments} /> */}
+                            {this.renderComments(this.props.comments)}
+                        {/* </div> */}
                     </div>
                 </div>
             );
