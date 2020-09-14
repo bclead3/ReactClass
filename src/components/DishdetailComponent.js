@@ -48,19 +48,21 @@ class DishDetail extends Component {
                 </div>
             );
         }
+        else {
+            return(<div></div>);
+        }
     }
 
     render() {
-        const selectedDish = this.props.selectedDish;
-        if (selectedDish == null) {
+        if (this.props.selectedDish == null) {
             return(<div></div>);
         }
         else {
             return (
                 <div className="container">
                     <div className="row">
-                        {this.renderDishDetail(selectedDish)}
-                        {this.renderComments(selectedDish.comments)}
+                        {this.renderDishDetail(this.props.selectedDish)}
+                        {this.renderComments(this.props.selectedDish.comments)}
                     </div>
                 </div>
             );
