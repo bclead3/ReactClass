@@ -22,7 +22,7 @@ class Main extends Component {
           </div>
         </Navbar>
         <Menu dishes={this.state.dishes} />
-        {/* <DishDetail dish={ this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0] } /> */}
+        {/* <DishDetail selectedDish={ this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0] } />  */}
       </div>
     );
   }
