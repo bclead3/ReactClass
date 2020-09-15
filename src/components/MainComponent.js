@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+// import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
+import About from './AboutComponent';
 import { DISHES } from '../shared/dishes';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { COMMENTS } from '../shared/comments';
@@ -43,11 +44,18 @@ class Main extends Component {
       );
     };
 
+    const AboutusPage = () => {
+      return(
+        <About leaders={this.state.leaders} />
+      );
+    }
+
     return(
       <div className="MainApp">
         <Header />
         <Switch>
             <Route path='/home' component={HomePage} />
+            <Route exact path='/aboutus' component={AboutusPage} />
             <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
             <Route path='/menu/:dishId' component={DishWithId} />
             <Route exact path='/contactus' component={Contact} />} />
