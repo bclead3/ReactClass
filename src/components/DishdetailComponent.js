@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';  //CardImgOverlay, 
 import { Link } from 'react-router-dom';
+import { COMMENTS } from '../shared/comments';
 
 class DishDetail extends Component {
 
@@ -9,7 +10,8 @@ class DishDetail extends Component {
 
         this.state = {
             selectedDish: null,
-            comments: null
+            comments: COMMENTS,
+            dishComments: []
         }
     }
 
@@ -27,15 +29,24 @@ class DishDetail extends Component {
                 </div>
             );
         }
+        else {
+            return(<div/>);
+        }
     }
 
     renderComments(comments) {
         if (comments != null) {
+            this.state.dishComments = [];
+            comments.map(comment => {
+                if (comment.dishId == this.props.selectedDish.id) {
+                    this.state.dishComments.push(comment)
+                }
+            });
             return(
                 <div className='col-12 col-md-5 m1'>
                     <h4>Comments</h4>
                     <ul className="list-unstyled">
-                        {comments.map((comment) => {
+                        {this.state.dishComments.map((comment) => {
                             return(
                                 <li key={comment.id}>
                                     <p>{comment.comment}</p>
@@ -55,6 +66,7 @@ class DishDetail extends Component {
     }
 
     render() {
+        var out_arr = [];
         if (this.props.selectedDish == null) {
             return(<div></div>);
         }
@@ -72,14 +84,8 @@ class DishDetail extends Component {
                         </div>                
                     </div>
                     <div className="row">
-                        {/* <div className="col-12 col-md-5 m-1"> */}
-                            {/* <RenderDish dish={props.dish} /> */}
-                            {this.renderDishDetail(this.props.selectedDish)}
-                        {/* </div> */}
-                        {/* <div className="col-12 col-md-5 m-1"> */}
-                            {/* <RenderComments comments={props.comments} /> */}
-                            {this.renderComments(this.props.comments)}
-                        {/* </div> */}
+                        {this.renderDishDetail(this.props.selectedDish)}
+                        {this.renderComments(this.state.comments)}
                     </div>
                 </div>
             );
