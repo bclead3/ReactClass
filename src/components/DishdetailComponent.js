@@ -36,9 +36,10 @@ class DishDetail extends Component {
 
     renderComments(comments) {
         if (comments != null) {
+            // this.setState({dishComments: []});
             this.state.dishComments = [];
             comments.map(comment => {
-                if (comment.dishId == this.props.selectedDish.id) {
+                if (comment.dishId === this.props.selectedDish.id) {
                     this.state.dishComments.push(comment)
                 }
             });
@@ -66,7 +67,6 @@ class DishDetail extends Component {
     }
 
     render() {
-        var out_arr = [];
         if (this.props.selectedDish == null) {
             return(<div></div>);
         }
