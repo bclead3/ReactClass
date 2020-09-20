@@ -222,9 +222,7 @@ class Contact extends Component {
                             <Col md={{size: 3, offset: 1}}>
                                  <Control.select
                                         model='.contactType'
-                                        name="contactType"
-                                        value={this.state.contactType}
-                                        onChange={this.handleInputChange} >
+                                        name="contactType" >
                                      <option>Tel.</option>
                                      <option>Email</option>
                                  </Control.select>
