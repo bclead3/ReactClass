@@ -36,6 +36,7 @@ class DishDetail extends Component {
 
     renderComments(comments) {
         if (comments != null) {
+            // this.setState({dishComments: []});
             this.state.dishComments = [];
             comments.map(comment => {
                 if (comment.dishId === this.props.selectedDish.id) {
