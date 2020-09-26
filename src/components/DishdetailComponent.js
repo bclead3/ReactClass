@@ -21,9 +21,16 @@ function RenderDish({dish}) {
     }
 }
 
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
+    console.log('comments');
+    console.log(comments);
+    console.log('addComment function');
+    console.log(addComment);
+    console.log('dishId');
+    console.log(dishId);
     if (comments != null) {
         return(
+            <div>
             <ul className="list-unstyled">
                 {comments.map((comment) => {
                     return(
@@ -36,6 +43,8 @@ function RenderComments({comments}) {
                     );
                 })}
             </ul>
+            <CommentForm dishId={dishId} addComment={addComment}></CommentForm>
+            </div>
         );
     }
     else {
@@ -54,6 +63,10 @@ class DishDetail extends Component {
    
     render(){
         const dish=this.props.selectedDish;
+        console.log('dish from props.selectedDish');
+        console.log(dish);
+        console.log('comments');
+        console.log(this.props.comments);
         if(dish != null){
             return (
                 <div className="container">
@@ -73,8 +86,11 @@ class DishDetail extends Component {
                         </div>
                         <div className="col-12 col-md-5 m-1">
                             <h4>Comments</h4>
-                            <RenderComments comments={COMMENTS.filter(comment => comment.dishId === dish.id)} />
-                            <CommentForm></CommentForm>
+                            {/* <RenderComments comments={COMMENTS.filter(comment => comment.dishId === dish.id)} */}
+                            <RenderComments comments={this.props.comments}
+                                addComment={this.props.addComment}
+                                dishId={this.props.dishId} />
+                            {/* <CommentForm dishId={this.props.dishId} addComment={this.props.addComment}></CommentForm> */}
                         </div>
                     </div>
                 </div>
@@ -96,6 +112,7 @@ class CommentForm extends Component {
     constructor(props){
         super(props);
         this.state = {
+            isNavOpen: false,
             isModalOpen: false
         }
         this.toggleModal = this.toggleModal.bind(this);
