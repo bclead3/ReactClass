@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { COMMENTS } from '../shared/comments';
 
 function RenderDish({dish}) {
     if (dish != null) {
@@ -46,14 +45,20 @@ function RenderComments({comments}) {
 class DishDetail extends Component {
 
     constructor(props) {
+        // console.log('props for DishDetail');
+        // console.log(props);
         super(props);
         this.state = {
-            isModalOpen: false
+            isNavOpen: false,
+            isModalOpen: false,
+            dish: false,
+            comments: []
         }
     }
    
     render(){
         const dish=this.props.selectedDish;
+        const comments=this.props.comments;
         if(dish != null){
             return (
                 <div className="container">
@@ -73,7 +78,7 @@ class DishDetail extends Component {
                         </div>
                         <div className="col-12 col-md-5 m-1">
                             <h4>Comments</h4>
-                            <RenderComments comments={COMMENTS.filter(comment => comment.dishId === dish.id)} />
+                            <RenderComments comments={comments} />
                             <CommentForm></CommentForm>
                         </div>
                     </div>
@@ -129,11 +134,11 @@ class CommentForm extends Component {
                         <Row>   
                             <Col>
                                 <Control.select model=".rating" className="form-control"name="rating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
                                     <option>5</option>
+                                    <option selected>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
                                 </Control.select>
                             </Col>
                         </Row>

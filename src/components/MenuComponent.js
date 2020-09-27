@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap'; // CardText, CardBody, 
 import { Link } from 'react-router-dom';
+import { COMMENTS } from '../shared/comments';
 import DishDetail from './DishdetailComponent';
 
 class Menu extends Component {
@@ -9,7 +10,8 @@ class Menu extends Component {
         super(props);
 
         this.state = {
-            selectedDish: null
+            selectedDish: null,
+            comments: null
         }
     }
 
@@ -27,13 +29,19 @@ class Menu extends Component {
     }
 
     onDishSelect(dish) {
-        this.setState({ selectedDish: dish});
+        // console.log('onDishSelect dish');
+        // console.log(dish);
+        var comments=COMMENTS.filter((comment) => comment.dishId === parseInt(dish.id,10))
+        // console.log('onDishSelect comments');
+        // console.log(comments);
+        this.setState({ selectedDish: dish });
+        this.setState({ comments: comments });
     }
 
-    renderDish(dish) {
+    renderDish(dish, comments) {
         if (dish != null)
             return(
-                <DishDetail selectedDish={dish} />
+                <DishDetail selectedDish={dish} comments={comments} />
             );
         else
             return(
@@ -72,7 +80,7 @@ class Menu extends Component {
                     {menu}
                 </div>
                 <div className="row">
-                     {this.renderDish(this.state.selectedDish)}
+                     {this.renderDish(this.state.selectedDish, this.state.comments)}
                 </div>
             </div>
         );
