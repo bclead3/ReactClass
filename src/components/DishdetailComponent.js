@@ -26,11 +26,11 @@ function RenderDish({dish}) {
     }
 }
 
-function RenderComments({comments, addComment, dishId}) {
+function RenderComments({comments, postComment, dishId}) {
     console.log('comments');
     console.log(comments);
-    console.log('addComment function');
-    console.log(addComment);
+    console.log('postComment function');
+    console.log(postComment);
     console.log('dishId');
     console.log(dishId);
     if (comments != null) {
@@ -48,7 +48,7 @@ function RenderComments({comments, addComment, dishId}) {
                     );
                 })}
             </ul>
-            <CommentForm dishId={dishId} addComment={addComment}></CommentForm>
+            <CommentForm dishId={dishId} postComment={postComment}></CommentForm>
         </div>
         );
     }
@@ -98,7 +98,7 @@ console.log(props);
                     <div className="col-12 col-md-5 m-1">
                         <h4>Comments</h4>
                         <RenderComments comments={props.comments}
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                             dishId={props.dish.id}
                         />
                     </div>
@@ -118,10 +118,10 @@ class CommentForm extends Component {
         super(props);
         this.state = {
             isNavOpen: false,
-            isModalOpen: false,
-            dishId: this.props.dishId,
-            dish: this.props.dish,
-            comments: this.props.comments
+            isModalOpen: false //,
+            // dishId: this.props.dishId,
+            // dish: this.props.dish,
+            // comments: this.props.comments
         }
         this.toggleModal = this.toggleModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -137,14 +137,14 @@ class CommentForm extends Component {
         //this.toggleModal();
         // alert("Current values are: " + JSON.stringify(values));
         console.log("Current values are: " + JSON.stringify(values));
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
-        this.setState({
-            dishId: this.props.dishId,
-            dish: this.props.dish,
-            comments: this.props.comments
-        });
-        console.log('this.state');
-        console.log(this.state);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+        // this.setState({
+        //     dishId: this.props.dishId,
+        //     dish: this.props.dish,
+        //     comments: this.props.comments
+        // });
+        // console.log('this.state');
+        // console.log(this.state);
     }
 
     render(){
