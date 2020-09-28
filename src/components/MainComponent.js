@@ -7,12 +7,8 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
 import About from './AboutComponent';
-// import { DISHES } from '../shared/dishes';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { COMMENTS } from '../shared/comments';
-// import { PROMOTIONS } from '../shared/promotions';
-// import { LEADERS } from '../shared/leaders';
 import { addComment, fetchDishes } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
@@ -30,17 +26,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-
-    // fetchDishes: () => { dispatch(fetchDishes()) }
-    // this.state = {
-    //   dishes: DISHES,
-    //   comments: COMMENTS,
-    //   promotions: PROMOTIONS,
-    //   leaders: LEADERS
-    // };
-  }
 
   componentDidMount() {
       this.props.fetchDishes();
