@@ -9,31 +9,53 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components';
 
 const RenderLeader = ({ leader }) => {
   return (
     <div className="col-12 mt-5">
-      <Media tag="li">
-        <Media left middle>
-          {/* <Media object src={baseUrl + leader.image} alt={leader.name} /> */}
-          <Media object src={baseUrl + leader.image} alt={leader.name} />
+      <Fade in>
+        <Media tag="li">
+          <Media left middle>
+            <Media object src={baseUrl + leader.image} alt={leader.name} />
+          </Media>
+          <Media body className="ml-5">
+            <Media heading>{leader.name}</Media>
+            <p>{leader.designation}</p>
+            <p>{leader.description}</p>
+          </Media>
         </Media>
-        <Media body className="ml-5">
-          <Media heading>{leader.name}</Media>
-
-          <p>{leader.designation}</p>
-          <p>{leader.description}</p>
-        </Media>
-      </Media>
+      </Fade>
     </div>
   );
 };
 
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
-    return <RenderLeader leader={leader} />;
+  const leaders = props.leaders.leaders.map((leader) => {
+    return(
+      <RenderLeader leader={leader} />
+    );
   });
 
+  if (props.leaders.isLoading) {
+    return(
+        <div className="container">
+            <div className="row">
+                <Loading />
+            </div>
+        </div>
+    );
+  }
+  else if (props.leaders.errMess) {
+      return(
+          <div className="container">
+              <div className="row">
+                  <h4>{props.leaders.errMess}</h4>
+              </div>
+          </div>
+      );
+  }
   return (
     <div className="container">
       <div className="row">
@@ -110,7 +132,9 @@ function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          <Stagger in>
+            <Media list>{leaders}</Media>
+          </Stagger>
         </div>
       </div>
     </div>

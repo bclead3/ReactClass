@@ -32,12 +32,12 @@ function RenderDish({dish}) {
 }
 
 function RenderComments({comments, postComment, dishId}) {
-    console.log('comments');
-    console.log(comments);
-    console.log('postComment function');
-    console.log(postComment);
-    console.log('dishId');
-    console.log(dishId);
+    // console.log('comments');
+    // console.log(comments);
+    // console.log('postComment function');
+    // console.log(postComment);
+    // console.log('dishId');
+    // console.log(dishId);
     if (comments != null) {
         return(
         <div>
@@ -127,10 +127,7 @@ class CommentForm extends Component {
         super(props);
         this.state = {
             isNavOpen: false,
-            isModalOpen: false //,
-            // dishId: this.props.dishId,
-            // dish: this.props.dish,
-            // comments: this.props.comments
+            isModalOpen: false
         }
         this.toggleModal = this.toggleModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -147,13 +144,6 @@ class CommentForm extends Component {
         // alert("Current values are: " + JSON.stringify(values));
         console.log("Current values are: " + JSON.stringify(values));
         this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
-        // this.setState({
-        //     dishId: this.props.dishId,
-        //     dish: this.props.dish,
-        //     comments: this.props.comments
-        // });
-        // console.log('this.state');
-        // console.log(this.state);
     }
 
     render(){
